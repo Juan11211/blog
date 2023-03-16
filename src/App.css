@@ -1,0 +1,10 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+@font-face {
+    font-family: 'New York Times';
+    src: url('./components/Chomsky.otf') format('truetype');
+  }
+  
