@@ -1,0 +1,48 @@
+.container {
+    perspective: 800px;
+    width: 200px;
+    height: 200px;
+    margin-top: 300px;
+  }
+  
+  
+  .cube {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    transform-style: preserve-3d;
+  }
+  
+  .side {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    color: black;
+    opacity: 0.6;
+  }
+  
+  .front {
+    transform: rotateY(0deg) translateZ(100px);
+    background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg');
+  }
+  .right {
+    transform: rotateY(90deg) translateZ(100px);
+    background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg');
+  }
+  .back {
+    transform: rotateY(180deg) translateZ(100px);
+    background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg');
+  }
+  .left {
+    transform: rotateY(-90deg) translateZ(100px);
+    background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg');
+  }
+  .top {
+    transform: rotateX(90deg) translateZ(100px);
+    background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg');
+  }
+  .bottom {
+    transform: rotateX(-90deg) translateZ(100px);
+    background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg');
+  }
+  

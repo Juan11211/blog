@@ -1,61 +1,9 @@
-// import React from 'react'
-// import { Link, useNavigate } from 'react-router-dom'
-// import styled from 'styled-components'
 
-// const Box = styled.div`
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   padding: 10px;
-//   top: 0px;
-//   left: 0px;
-//   position: fixed;
-//   height: 100vh;
-//   width: 50vw;
-//   z-index: 1;
-//   background-image: url('https://i.pinimg.com/474x/f1/75/2e/f1752e799ae1d04b3e2a56b8a5bec0ef.jpg');
-//   background-size: cover;
-//   background-position: left;
-// `;
-
-  
-
-// const BoxTitle = styled.h2`
-//   text-align: center;
-//   margin: 30px;
-//   font-size: 60px;
-// `
-
-// const Signup = styled.span` 
-//     display: flex;
-//     align-items: center;
-//     justify-content: space-between;
-//     margin-right: 10px;
-//     font-size: 20px;
-//     `
-    
-// const StyledLink = styled(Link)`
-// text-decoration: none;
-// color: white;
-// cursor: pointer;
-// top: 0px;
-// right: 0px;
-//   `;
-
-// function Register() {
-//   return (
-//     <Box>
-//       <StyledLink to='/'><BoxTitle>CODETIMES</BoxTitle></StyledLink>
-//       <StyledLink  to='/signup'><Signup>Register</Signup></StyledLink>
-//       <StyledLink to='/login'><Signup>Login</Signup></StyledLink> 
-//     </Box>
-//   )
-// }
-
-// export default Register
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
+import { motion } from "framer-motion"
+import Animation from './Animation';
 
 const Parent = styled.div`
   display: flex;
@@ -63,6 +11,7 @@ const Parent = styled.div`
   margin: 0px;
   padding: 0px;
   justify-content: space-between; /* add this line to evenly space the Box and the background div */
+  
 `;
 
 const Box = styled.div`
@@ -124,17 +73,64 @@ const Button = styled.button`
   }
 `;
 
+const DropInAnimation = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(-50%) translateX(-50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0%);
+  }
+`;
+
+const PopOutAnimation = keyframes`
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+`;
+
+const TitleLink = styled(Link)`
+font-size: 60px;
+color: #333;
+position: relative;
+text-align: center;
+top: 50%;
+transform: translateY(-50%);
+animation: ${props => props.clicked ? PopOutAnimation : DropInAnimation} 1s forwards;
+text-decoration: none;
+&:hover {
+  cursor: pointer;
+}
+
+`
+
 function Register() {
+
   return (
     <Parent>
       <Box>
         <div>
-          <BoxTitle>The Coding Corner</BoxTitle>
-         <Signup to='/signup'><Button>Register</Button> </Signup>
+          <BoxTitle>
+            <TitleLink to='/feed'>The Coding Corner</TitleLink>     
+          </BoxTitle>
+          <Signup to='/signup'><Button>Register</Button> </Signup>
           <Signup to='/login'><Button>Login</Button></Signup>
         </div>
+        
       </Box>
-      <div style={{ width: '30vw', height: '100vh', backgroundImage: `url('https://i.pinimg.com/474x/f1/75/2e/f1752e799ae1d04b3e2a56b8a5bec0ef.jpg')`, backgroundSize: 'cover', backgroundPosition: 'left' }}></div>
+      <Animation />
+      <div style={{ width: '30vw', height: '100vh', backgroundImage: `url('https://i.pinimg.com/474x/f1/75/2e/f1752e799ae1d04b3e2a56b8a5bec0ef.jpg')`, backgroundSize: 'cover', backgroundPosition: 'left', marginLeft: '10px;' }}></div>
+
     </Parent>
   );
 }
