@@ -20,8 +20,17 @@ async function connectToDatabase() {
   connectToDatabase();
 
 app.use('/auth', require('./routes/authRouter.js'))
+// express jwt = gatekeeper, checks for token
 app.use('/api', expressjwt({ secret: process.env.SECRET, algorithms: ['HS256']})) // req.user
-app.use('/feed', require('./Routes/feedRouter.js'))
+app.use('/api/post', require('./Routes/postRouter.js'))
+
+app.use((err, req, res, next) => { 
+  console.log(err)
+  if(err.name == 'Unauthorized Error' ){
+    res.status(err.status)
+  }
+  return res.send({errMsg: err.message})
+})
 
 app.listen(9000, () => { 
     console.log('Server is running on Port 9000')

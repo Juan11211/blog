@@ -28,3 +28,7 @@ if (validator.isEmail(email)) {
 In this code, the isEmail() function is used to check whether the email variable contains a valid email address. If the function returns true, the email address is considered valid; otherwise, it is considered invalid.
 
 The validator package is a popular choice for validating and sanitizing user input in Node.js applications, and it is widely used in many frameworks and libraries, including Express and Mongoose.
+
+//findOne() method in Mongoose no longer supports callbacks. Instead, it returns a Query object that can be chained with other methods.
+
+To fix the error, you can modify the findOne() method call in your code to use the exec() method to execute the query and handle the result with a callback function. 
