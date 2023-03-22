@@ -9,6 +9,61 @@ const getAllPost = async (req, res, next) => {
       res.status(500).json({ message: 'Internal Server Error' });
     }
   };
+
+const postPost = async(req, res, next) => {
+    try {
+        // this is what being passed in by the user
+      const { title, body, image, author, tags } = req.body;
+      // userId is the id of the auth -- if schema was authId it would be called authId
+      const userId = req.auth._id;
+      // newPost is including the userId
+      const newPost = new Post({ title, body, image, author, userId, tags });
+      const savedPost = await newPost.save();
+      return res.status(201).send(savedPost);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Internal Server Error' });
+    }
+  }
+
+const editPost = async (req, res, next) => {
+    try {
+      const updatedPost = await Post.findOneAndUpdate(
+        { _id: req.params.postId },
+        req.body,
+        { new: true }
+      );
+  
+      if (!updatedPost) {
+        return res.status(404).json({ message: 'Post not found' });
+      }
+  
+      return res.status(200).json(updatedPost);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Internal Server Error' });
+    }
+  };
+
+  const deletePost = async (req, res, next) => {
+    try {
+      const deletedPost = await Post.findOneAndDelete({ _id: req.params.postId });
+  
+      if (!deletedPost) {
+        return res.status(404).json({ message: 'Post cannot be deleted' });
+      }
+  
+      return res.status(200).json({ message: 'Post has been deleted'});
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Internal Server Error' });
+    }
+  };
+  
+  
+  
   
 
-module.exports = getAllPost
+  
+
+module.exports = {getAllPost, postPost, editPost, deletePost}

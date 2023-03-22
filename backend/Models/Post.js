@@ -12,6 +12,12 @@ const postSchema = new Schema({
         required: true, 
         trim: true
     },
+    // adding userId 
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    }, 
     body: { 
         type: String, 
         required: true, 
@@ -25,10 +31,13 @@ const postSchema = new Schema({
         type: String, 
         trim: true
     },
+    tags: {
+        type: [String], 
+        trim: true
+    },
     comments: {
         type: Schema.Types.ObjectId,
         ref: 'Comment',
-        required: true
     },
     likes: { 
         type: Number,
@@ -37,7 +46,6 @@ const postSchema = new Schema({
     likers: { 
         type: Array
     }
+});
 
-})
-
-module.exports = mongoose.model('Post', postSchema)
+module.exports = mongoose.model('Post', postSchema);
