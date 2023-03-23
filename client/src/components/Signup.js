@@ -1,9 +1,6 @@
 import React, {useState, useContext} from 'react'
 import styled from 'styled-components';
-// import { AuthContext } from '../context/AuthProvider'
-// import { useNavigate } from 'react-router-dom';
-import AuthContext from '../context/AuthContext';
-import { useSignup } from '../hooks/useSign';
+
 
 const Container = styled.div`
   display: flex;
@@ -11,6 +8,7 @@ const Container = styled.div`
   align-items: center;
   height: 100vh;
 `;
+
 
 const ImageContainer = styled.div`
   position: fixed;
@@ -67,93 +65,55 @@ const Button = styled.button`
   }
 `;
 
-// const initInputs = {username: " ", email: "", password: " "} 
+const initInputs = {username: " ", email: "", password: " "} 
 
-// function Signup() {
+function Signup() {
 
-//   const [inputs, setInputs] = useState(initInputs)
+  const [inputs, setInputs] = useState(initInputs)
   
 
-//   function handleChange(e){
-//     const {name, value} = e.target
-//     setInputs(prevInputs => ({
-//         ...prevInputs,
-//         [name]: value
-//     }))
-// }
+  function handleChange(e){
+    const {name, value} = e.target
+    setInputs(prevInputs => ({
+        ...prevInputs,
+        [name]: value
+    }))
+}
 
-// function handleSignup(e){
-//   e.preventDefault()
-//   signup(inputs)
+function handleSignup(e){
+  e.preventDefault()
+ // signup(inputs)
   
-// }
+}
 
-//   return (
-//     <Container>
-//            <ImageContainer>
-//         <Image src="https://i.pinimg.com/474x/f1/75/2e/f1752e799ae1d04b3e2a56b8a5bec0ef.jpg" alt="login image" />
-//       </ImageContainer>
-//       <Form onSubmit={handleSignup}>
-//           <Input 
-//             placeholder='Username'
-//             name='username'
-//             value={inputs.username}
-//             onChange={handleChange}
-//           />
-//            <Input 
-//             placeholder='Email'
-//             name='email'
-//             value={inputs.email}
-//             onChange={handleChange}
-//           />
-//            <Input 
-//             placeholder='Password' 
-//             name='password'
-//             value={inputs.password}
-//             onChange={handleChange}
-//           />
-//           <Button type='submit'>Sign Up</Button>
-          
-//       </Form>
-
-//     </Container>
-//   )
-// }
-
-const Signup = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [ username, setUsername] = useState('')
-  const {signup, error, isLoading} = useSignup(); 
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    await signup(email, username, password)
-  }
-
-  return(
+  return (
     <Container>
-        <ImageContainer>
-//         <Image src="https://i.pinimg.com/474x/f1/75/2e/f1752e799ae1d04b3e2a56b8a5bec0ef.jpg" alt="login image" />
-//       </ImageContainer>
-      <Form onSubmit={handleSubmit}>
-        <h3>Sign up</h3>
+           <ImageContainer>
+        <Image src="https://i.pinimg.com/474x/f1/75/2e/f1752e799ae1d04b3e2a56b8a5bec0ef.jpg" alt="login image" />
+      </ImageContainer>
+      <Form onSubmit={handleSignup}>
           <Input 
-            placeholder='Username' 
-            onChange={(e) => setUsername(e.target.value)}
-            value={username} />
-          <Input 
-            placeholder='email' 
-            onChange={(e) => setEmail(e.target.value)}
-            value={email} />
-          <Input 
-            placeholder='password'
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}  />
-        <button disabled={isLoading}>Sign up</button>
-        {error && <div className='error'>{error}</div>}
+            placeholder='Username'
+            name='username'
+            value={inputs.username}
+            onChange={handleChange}
+          />
+           <Input 
+            placeholder='Email'
+            name='email'
+            value={inputs.email}
+            onChange={handleChange}
+          />
+           <Input 
+            placeholder='Password' 
+            name='password'
+            value={inputs.password}
+            onChange={handleChange}
+          />
+          <Button type='submit'>Sign Up</Button>
+          
       </Form>
+
     </Container>
   )
 }
