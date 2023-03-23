@@ -35,10 +35,11 @@ const postSchema = new Schema({
         type: [String], 
         trim: true
     },
-    comments: {
+    comments: [{
         type: Schema.Types.ObjectId,
         ref: 'Comment',
-    },
+        required: true
+    }],
     likes: { 
         type: Number,
         default: 0

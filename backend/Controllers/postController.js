@@ -10,6 +10,18 @@ const getAllPost = async (req, res, next) => {
     }
   };
 
+const getAllUserPosts = async (req, res, next) => {
+    try {
+      const userId = req.auth._id; // get the user ID from the authenticated request
+      const posts = await Post.find({ userId }); // find all posts with matching user ID
+      res.status(200).json({ posts });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  };
+  
+
 const postPost = async(req, res, next) => {
     try {
         // this is what being passed in by the user
@@ -66,4 +78,4 @@ const editPost = async (req, res, next) => {
 
   
 
-module.exports = {getAllPost, postPost, editPost, deletePost}
+module.exports = {getAllPost, getAllUserPosts, postPost, editPost, deletePost}

@@ -23,10 +23,11 @@ app.use('/auth', require('./routes/authRouter.js'))
 // express jwt = gatekeeper, checks for token
 app.use('/api', expressjwt({ secret: process.env.SECRET, algorithms: ['HS256']})) // req.user
 app.use('/api/post', require('./Routes/postRouter.js'))
+app.use('/api/comment', require('./Routes/commentRouter'))
 
-app.use((err, req, res, next) => { 
+app.use((err, req, res, next) => {
   console.log(err)
-  if(err.name == 'Unauthorized Error' ){
+  if(err.name === "UnauthorizedError"){
     res.status(err.status)
   }
   return res.send({errMsg: err.message})
