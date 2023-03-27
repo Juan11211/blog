@@ -14,7 +14,7 @@ const signupRoute = async (req, res, next) => {
     const newUser = new User(req.body)
     const savedUser = await newUser.save()
     const token = jwt.sign(savedUser.toObject(), process.env.SECRET)
-    return res.status(201).send({ token, user: savedUser })
+      return res.status(201).send({ token, user: savedUser })
   } catch (err) {
     res.status(500)
     return next(err)
@@ -22,23 +22,33 @@ const signupRoute = async (req, res, next) => {
 }
 
 const loginRoute = async(req, res, next) => { 
-    try {
-        const user = await User.findOne({ username: req.body.username.toLowerCase() })
-        if(!user){
-            res.status(403)
-            return next(new Error('Username or password is incorrect'))
-        }
-        if(req.body.password != user.password){
-            res.status(403)
-            return next (new Error('Username or password is incorrect'))
-        }
-        const token = jwt.sign(user.toObject(), process.env.SECRET)
-        return res.status(201).send({ token, user })
-      } catch (err) {
+  try {
+    const user = await User.findOne({ email: req.body.email.toLowerCase() })
+
+    if(!user){
+      res.status(403)
+      return next(new Error('Username or password is incorrect'))
+    }
+
+    user.checkPassword(req.body.password, (err, isMatch) => {
+      if(err) {
         res.status(500)
         return next(err)
       }
+      if(!isMatch) {
+        res.status(403)
+        return next(new Error('Username or password is incorrect'))
+      }
+      const token = jwt.sign(user.toObject(), process.env.SECRET)
+      return res.status(201).send({ token, user })
+    })
+
+  } catch (err) {
+    res.status(500)
+    return next(err)
   }
+}
+
   
     
 module.exports = {signupRoute, loginRoute}

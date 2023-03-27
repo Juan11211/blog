@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Task() {
+function Profile() {
   return (
     <div>
-      Task
+      
     </div>
   )
 }
 
-export default Task
+export default Profile

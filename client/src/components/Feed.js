@@ -27,7 +27,6 @@ const Description = styled.p`
 const Title = styled.h2` 
 width: 100vh;
 margin-top: 20px;
-
 `
 const Hr = styled.hr`
   

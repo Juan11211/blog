@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import AuthForm from './AuthForm';
 
 const Signup = styled(Link)`
   display: inline-flex;
@@ -31,8 +32,8 @@ function Navbar() {
         <NavbarTitle to='/feed'>Code Times</NavbarTitle>
       </div>
       <div>
-        <Signup to='/signup'>Signup</Signup>
-        <Signup to='/login'>Login</Signup>
+        <Signup to='/signup'><AuthForm /></Signup>
+        <Signup to='/login'><AuthForm /></Signup>
       </div>
   
     </Container>

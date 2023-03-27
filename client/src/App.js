@@ -1,26 +1,36 @@
-import React from 'react'
-import Register from './components/Register'
+import React, { useContext } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
-import Signup from './components/Signup'
-import Login from './components/Login'
-import Feed from './components/Feed'
-import './App.css'
+import Navbar from './components/Navbar.js'
+import Auth from './components/Auth.js'
+import { UserContext } from './context/UserProvider.js'
+import Feed from './components/Feed.js'
+import Profile from './components/Profile.js'
+import ProtectedRoute from './components/ProtectedRoute.js'
 
-function App() {
+export default function App(){
+  const { token, logout } = useContext(UserContext)
   return (
-    <div>
+    <div className="app">
+      <Navbar logout={logout}/>
       <Routes>
         <Route 
-          path='/' element={<Register /> } />
+          path="/" 
+          element={ token ? <Navigate to="/feed" /> : <Auth />}
+        />
         <Route 
-          path='/signup' element={<Signup /> } />
-        <Route 
-          path='/login' element={<Login /> } />
-        <Route 
-          path='/feed' element={<Feed /> } />
+          path='/feed' 
+            element={ <Feed />}
+        />
+          <Route 
+          path="/profile" 
+          element={
+            <ProtectedRoute token={token} redirectTo="/feed">
+              <Profile/>
+            </ProtectedRoute>
+          }
+        />
+       
       </Routes>
     </div>
   )
 }
-
-export default App
