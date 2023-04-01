@@ -9,6 +9,12 @@ require('dotenv').config();
 app.use(express.json());
 app.use(morgan('dev'));
 
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'path/to/index.html'));
+});
+
+
 async function connectToDatabase() {
     try {
       await mongoose.connect(process.env.MONGO);

@@ -1,21 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
-import Navbar from './Navbar'
+import Navbar from './Navbar';
+
 
 const Container = styled.div` 
   display: flex;
   flex-direction: column;
   margin-left: 30px;
   margin-top: 30px;
-  width: 100vh;
+  width: 100vw;
   margin: 20px;
   margin-bottom: 30px; /* Add margin bottom to move the hr line further down */
 `;
 
 const ContainerImage = styled.img` 
-  width: 100vh;
+  width: 50vw;
   height: 50vh;
   display: flex;
+  align-items: center;
   justify-content: center;
 `
 
