@@ -21,6 +21,18 @@ const getAllUserPosts = async (req, res, next) => {
     }
   };
   
+  const getUserPosts = async (req, res, next) => {
+    try {
+      const userId = req.auth._id;
+      const posts = await Post.find({ userId });
+      res.status(200).json({ posts });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  }                                                                                                                     ;
+  
+  
 
 const postPost = async(req, res, next) => {
     try {
@@ -78,4 +90,4 @@ const editPost = async (req, res, next) => {
 
   
 
-module.exports = {getAllPost, getAllUserPosts, postPost, editPost, deletePost}
+module.exports = {getAllPost, getAllUserPosts, postPost, editPost, deletePost, getUserPosts}
